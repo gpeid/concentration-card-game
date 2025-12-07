@@ -2,11 +2,11 @@
 Quick matching game for my son to help boost memory, focus, and problem solving.
 
 ## Built with
--React
--TypeScript
--Vite
--TailwindCSS
--some custom css
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- some custom css
 
 ## How to play
 - Simple 52-card with suits and ranks.
