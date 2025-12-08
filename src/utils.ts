@@ -1,10 +1,11 @@
+import type { CardProperties } from "./types/types";
 
 
 
-const generateDeck = () => {
+const generateDeck = (): CardProperties[] => {
     const suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
     const ranks = ["Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"]
-    const newDeck: object[] = [];
+    const newDeck: CardProperties[] = [];
     suits.forEach((suit) => {
         ranks.forEach((rank => {
             newDeck.push({
@@ -18,7 +19,7 @@ const generateDeck = () => {
     return newDeck;
 }
 
-const shuffleDeck = (array: Array<object>) => {
+const shuffleDeck = (array: CardProperties[]): CardProperties[] => {
     // const shuffledDeck = [];
 
     const copy = []

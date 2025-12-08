@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Card from './Card';
 import "./../css/DeckContainer.css";
+import type { CardProperties } from '../types/types';
 
 interface DeckContainerProps {
-  deck: CardData[];
-}
-
-interface CardData {
-  id: string;
-  suit: string;
-  rank: string;
-  label: string;
+  deck: CardProperties[];
 }
 
 const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
   // Array of all matched pairs
-  const [arrayOfSelectedMatches, setArrayOfSelectedMatches] = useState([]);
+  const [arrayOfSelectedMatches, setArrayOfSelectedMatches] = useState<CardProperties[][]>([]);
   // array of selected paira
-  const [pairArray, setPairArray] = useState([]);
-  const [deckCopy, setDeckCopy] = useState(deck.slice())
+  const [pairArray, setPairArray] = useState<CardProperties[]>([]);
+  const [deckCopy, setDeckCopy] = useState<CardProperties[]>(deck.slice())
   console.log('deck', deck)
   console.log(deckCopy)
 
-  const handleSelectCardClick = (selectedCard: CardData): void => {
+  const handleSelectCardClick = (selectedCard: CardProperties): void => {
     const alreadySelected = pairArray.find((card) => card.id === selectedCard.id);
     if (pairArray.length < 2 && !alreadySelected) {
-      const matchingCardsFound: object | undefined = pairArray.find(item => item.rank === selectedCard.rank);
+      const matchingCardsFound: CardProperties | undefined = pairArray.find(item => item.rank === selectedCard.rank);
       console.log('matching', matchingCardsFound);
       if (matchingCardsFound) {
         const arrayOfMatchedPairs = [...pairArray, selectedCard];
@@ -61,8 +55,8 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
 
   return (
     <div className="card_container grid grid-cols-[repeat(12,minmax(0,1fr))_1fr]">
-      {deck.map((card: CardData) => (
-        <Card selectCardClick={() => handleSelectCardClick(card)} key={`${card.suit}-${card.rank}`} details={card} toggleSelected={pairArray.find(item => item.id === card.id)} matchedCard={deckCopy.findIndex(cardCopy => cardCopy.id === card.id) === -1} />
+      {deck.map((card: CardProperties) => (
+        <Card selectCardClick={() => handleSelectCardClick(card)} key={`${card.suit}-${card.rank}`} details={card} toggleSelected={!!pairArray.find(item => item.id === card.id)} matchedCard={deckCopy.findIndex(cardCopy => cardCopy.id === card.id) === -1} />
       ))}
     </div>
   );
