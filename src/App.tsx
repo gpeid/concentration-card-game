@@ -1,3 +1,5 @@
+import "./App.css";
+
 import type { CardProperties } from './types/types';
 import DeckContainer from './components/DeckContainer';
 import { generateDeck, shuffleDeck } from './utils';

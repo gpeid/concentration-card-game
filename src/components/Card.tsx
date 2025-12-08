@@ -6,18 +6,17 @@ interface CardProps {
   details: CardProperties;
   toggleSelected: boolean;
   matchedCard: boolean;
-  selectCardClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectCardClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const Card: React.FC<CardProps> = ({ details, toggleSelected, matchedCard, selectCardClick }) => {
   return (
-    <button
-      type='button'
+    <div
       onClick={!matchedCard ? selectCardClick : undefined}
-      className={`card cursor-pointer hover:bg-fuchsia-400 ${toggleSelected ? "selected bg-blue-400" : ""} ${matchedCard && "cursor-not-allowed bg-green-600"}`}
+      className={`card cursor-pointer hover:bg-fuchsia-400 ${toggleSelected ? "selected bg-blue-400" : ""} ${matchedCard ? "cursor-not-allowed bg-green-600" : ""}`}
     >
       {details.label}
-    </button>
+    </div>
   );
 };
 
