@@ -1,7 +1,5 @@
 import type { CardProperties } from "./types/types";
 
-
-
 const generateDeck = (): CardProperties[] => {
     const suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
     const ranks = ["Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"]
@@ -20,15 +18,13 @@ const generateDeck = (): CardProperties[] => {
 }
 
 const shuffleDeck = (array: CardProperties[]): CardProperties[] => {
-    // const shuffledDeck = [];
-
     const copy = []
     let n = array.length
     let i: number;
 
     // While there remain elements to shuffle…
     while (n) {
-        // Pick a remaining element…
+        // Pick a remaining element...
         i = Math.floor(Math.random() * n--);
         // And move it to the new array.
         // array splice to remove item from index i

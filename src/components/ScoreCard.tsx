@@ -1,0 +1,22 @@
+import type { CardProperties } from "../types/types";
+
+interface ScoreCardProps {
+  matches: CardProperties[][];
+}
+
+const ScoreCard: React.FC<ScoreCardProps> = ({ matches }) => {
+  return (
+    <div className="score_card p-1 border border-black rounded">
+      <h2>Matched Pairs: {matches.length}</h2>
+      <ul>
+        {matches.map((pair) => (
+          <li key={`${pair[0].id}-${pair[1].id}`}>
+            {pair.map((card) => card.label).join(" and ")}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ScoreCard;
