@@ -11,3 +11,13 @@
   position: relative;
   overflow: hidden;
 }
+
+.hearts,
+.diamonds {
+  color: var(--color-red-500);
+}
+
+.clubs,
+.spades {
+  color: var(--color-black);
+}
