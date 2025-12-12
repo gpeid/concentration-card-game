@@ -76,13 +76,27 @@ const Card: React.FC<CardProps> = ({
           .to((value) => `rotateZ(${value}deg)`), // Apply the CSS transform
       }}
       onClick={!matchedCard ? selectCardClick : undefined}
-      className={`card cursor-pointer ${details.suit?.toLowerCase()} hover:bg-fuchsia-400 
+      className={`card cursor-pointer p-1 ${details.suit?.label.toLowerCase()} hover:bg-fuchsia-400 
       ${!toggleSelected && !matchedCard ? "bg-white" : ""}
         ${toggleSelected ? "selected bg-blue-400" : ""} ${
         matchedCard ? "cursor-not-allowed bg-green-600" : ""
       }`}
     >
-      {details.label}
+      <div className="flex flex-col items-start text-center leading-tight">
+        <span>
+          {details.rank !== "10" ? details.rank?.charAt(0) : details.rank}{" "}
+          <br />
+          {details.suit?.icon}
+        </span>
+      </div>
+      <div className="text-center scale-200">{details.suit?.icon}</div>
+      <div className="flex flex-col items-end text-center leading-tight rotate-x-180">
+        <span>
+          {details.rank !== "10" ? details.rank?.charAt(0) : details.rank}{" "}
+          <br />
+          {details.suit?.icon}
+        </span>
+      </div>
     </animated.div>
   );
 };

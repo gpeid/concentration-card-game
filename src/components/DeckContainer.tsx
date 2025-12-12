@@ -36,7 +36,7 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
           const i = deck.findIndex((card) => card.id === item.id);
           deckCopy.splice(i, 1, {
             id: "",
-            suit: "",
+            suit: { label: "", icon: "" },
             rank: "",
             label: "",
           });
@@ -56,11 +56,11 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
       <div className="col-span-1">
         <ScoreCard matches={arrayOfSelectedMatches} />
       </div>
-      <div className="card_container grid grid-cols-[repeat(12,minmax(0,1fr))_1fr] col-span-11 gap-2">
+      <div className="card_container col-span-11 grid grid-cols-13 gap-2">
         {deck.map((card: CardProperties) => (
           <Card
             selectCardClick={() => handleSelectCardClick(card)}
-            key={`${card.suit}-${card.rank}`}
+            key={`${card.suit?.label}-${card.rank}`}
             details={card}
             toggleSelected={!!pairArray.find((item) => item.id === card.id)}
             matchedCard={

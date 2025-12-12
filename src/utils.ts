@@ -1,16 +1,33 @@
 import type { CardProperties } from "./types/types";
 
 const generateDeck = (): CardProperties[] => {
-    const suits = ["Hearts", "Diamonds", "Spades", "Clubs"]
+    const suits = [
+        {
+            label: "Hearts",
+            icon: "♥"
+        },
+        {
+            label: "Diamonds",
+            icon: "♦"
+        },
+        {
+            label: "Spades",
+            icon: "♣"
+        },
+        {
+            label: "Clubs",
+            icon: "♠"
+        },
+    ]
     const ranks = ["Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"]
     const newDeck: CardProperties[] = [];
     suits.forEach((suit) => {
         ranks.forEach((rank => {
             newDeck.push({
-                id: `${rank}-${suit}`,
+                id: `${rank}-${suit.icon}`,
                 ...{ suit },
                 ...{ rank },
-                label: `${rank} of ${suit}`
+                label: `${rank} of ${suit.icon}`
             });
         }))
     })
