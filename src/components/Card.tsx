@@ -55,7 +55,7 @@ const Card: React.FC<CardProps> = ({
     config: {
       tension: Math.floor(randomNumber.y * 100) + 100,
       friction: 20,
-      easing: easings.steps(5, "start"),
+      easing: easings.easeInBack,
     },
     from: from,
     to: to,
