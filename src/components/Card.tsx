@@ -68,15 +68,15 @@ const Card: React.FC<CardProps> = ({
 
   return (
     <animated.div
-      style={{
-        ...springs,
-        // transform: springs.rotation.to((r) => `rotate(${r}deg)`),
-        transform: springs.x
-          // .to([0, 1], [0, 360]) // Map the range 0-1 to 0-360 degrees
-          .to((value) => `rotateZ(${value}deg)`), // Apply the CSS transform
+    style={{
+      ...springs,
+      // transform: springs.rotation.to((r) => `rotate(${r}deg)`),
+      transform: springs.x
+      // .to([0, 1], [0, 360]) // Map the range 0-1 to 0-360 degrees
+      .to((value) => `rotateZ(${value}deg)`), // Apply the CSS transform
       }}
       onClick={!matchedCard ? selectCardClick : undefined}
-      className={`card cursor-pointer p-1 ${details.suit?.label.toLowerCase()} hover:bg-fuchsia-400 
+      className={`card cursor-pointer p-1 flex flex-col justify-between ${details.suit?.label.toLowerCase()} hover:bg-fuchsia-400 
       ${!toggleSelected && !matchedCard ? "bg-white" : ""}
         ${toggleSelected ? "selected bg-blue-400" : ""} ${
         matchedCard ? "cursor-not-allowed bg-green-600" : ""
@@ -89,8 +89,8 @@ const Card: React.FC<CardProps> = ({
           {details.suit?.icon}
         </span>
       </div>
-      <div className="text-center scale-200">{details.suit?.icon}</div>
-      <div className="flex flex-col items-end text-center leading-tight rotate-x-180">
+      <div className="text-center text-3xl">{details.suit?.icon}</div>
+      <div className="flex flex-col items-start text-center leading-tight rotate-x-180 rotate-y-180">
         <span>
           {details.rank !== "10" ? details.rank?.charAt(0) : details.rank}{" "}
           <br />
