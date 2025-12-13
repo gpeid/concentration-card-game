@@ -3,6 +3,7 @@
   max-width: 1440px;
   margin: 0 auto;
   padding: 2rem;
+  overflow: hidden;
 }
 
 .logo {
@@ -32,4 +33,3 @@
     animation: logo-spin infinite 20s linear;
   }
 }
-
