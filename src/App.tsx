@@ -7,13 +7,23 @@ import { useState } from "react";
 
 function App() {
   const [deck, setDeck] = useState<CardProperties[]>([]);
+  
+  const root = document.querySelector("#root");
 
   const handleGenerateDeckClick = () => {
     setDeck(generateDeck());
+    setTimeout(() => {
+      root?.classList.add("overflow-hidden");
+    }, 1000);
   };
 
   const handleShuffleDeckClick = () => {
+    root?.classList.remove("overflow-hidden");
+
     setDeck(shuffleDeck(deck));
+    setTimeout(() => {
+      root?.classList.add("overflow-hidden");
+    }, 1000);
   };
 
   return (

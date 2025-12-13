@@ -51,13 +51,6 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
     }
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      const root = document.querySelector("#root");
-      root?.classList.add("overflow-hidden");
-    }, 1000);
-  }, []);
-
   return (
     <div className="game_container">
       <ScoreCard matches={arrayOfSelectedMatches} />
