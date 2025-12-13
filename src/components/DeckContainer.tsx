@@ -13,7 +13,7 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
   const [arrayOfSelectedMatches, setArrayOfSelectedMatches] = useState<
     CardProperties[][]
   >([]);
-  // array of selected paira
+  // array of selected pairs
   const [pairArray, setPairArray] = useState<CardProperties[]>([]);
   const [deckCopy, setDeckCopy] = useState<CardProperties[]>(deck.slice());
 
@@ -52,22 +52,22 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
   };
 
   return (
-    <div className="deck_container relative grid grid-cols-12">
-      <div className="col-span-1">
-        <ScoreCard matches={arrayOfSelectedMatches} />
-      </div>
-      <div className="card_container col-span-11 grid grid-cols-13 gap-2">
-        {deck.map((card: CardProperties) => (
-          <Card
-            selectCardClick={() => handleSelectCardClick(card)}
-            key={`${card.suit?.label}-${card.rank}`}
-            details={card}
-            toggleSelected={!!pairArray.find((item) => item.id === card.id)}
-            matchedCard={
-              deckCopy.findIndex((cardCopy) => cardCopy.id === card.id) === -1
-            }
-          />
-        ))}
+    <div className="game_container">
+      <ScoreCard matches={arrayOfSelectedMatches} />
+      <div className="deck_container relative grid grid-cols-12">
+        <div className="card_container col-span-12 grid grid-cols-13 gap-2">
+          {deck.map((card: CardProperties) => (
+            <Card
+              selectCardClick={() => handleSelectCardClick(card)}
+              key={`${card.suit?.label}-${card.rank}`}
+              details={card}
+              toggleSelected={!!pairArray.find((item) => item.id === card.id)}
+              matchedCard={
+                deckCopy.findIndex((cardCopy) => cardCopy.id === card.id) === -1
+              }
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

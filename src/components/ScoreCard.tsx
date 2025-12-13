@@ -6,7 +6,7 @@ interface ScoreCardProps {
 
 const ScoreCard: React.FC<ScoreCardProps> = ({ matches }) => {
   return (
-    <div className="score_card p-1 border border-black rounded">
+    <div className="score_card p-1 mb-5 border border-black rounded">
       <h2>Matched Pairs: {matches.length}</h2>
       <ul>
         {matches.map((pair) => (
