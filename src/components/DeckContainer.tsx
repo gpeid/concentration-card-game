@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "./Card";
 import "./../css/DeckContainer.css";
 import type { CardProperties } from "../types/types";
@@ -50,6 +50,13 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
       setPairArray([selectedCard]);
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      const root = document.querySelector("#root");
+      root?.classList.add("overflow-hidden");
+    }, 1000);
+  }, []);
 
   return (
     <div className="game_container">
