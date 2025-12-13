@@ -35,7 +35,7 @@ const Card: React.FC<CardProps> = ({
     y: randomNumber.positiveOrNegative() * Math.floor(randomNumber.y * 1600),
     rotation:
       randomNumber.positiveOrNegative() * Math.floor(randomNumber.z * 1080),
-    scale: 3.5,
+    scale: 1.5,
   };
 
   const to = {
