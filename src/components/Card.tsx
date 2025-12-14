@@ -7,6 +7,7 @@ interface CardProps {
   details: CardProperties;
   toggleSelected: boolean;
   matchedCard: boolean;
+  pairedCard: boolean;
   selectCardClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
@@ -14,6 +15,7 @@ const Card: React.FC<CardProps> = ({
   details,
   toggleSelected,
   matchedCard,
+  pairedCard,
   selectCardClick,
 }) => {
   const [randomNumber] = useState<{
@@ -65,22 +67,21 @@ const Card: React.FC<CardProps> = ({
   //   ...to(i),
   //   from: from(i),
   // }));
-
   return (
     <animated.div
-    style={{
-      ...springs,
-      // transform: springs.rotation.to((r) => `rotate(${r}deg)`),
-      transform: springs.x
-      // .to([0, 1], [0, 360]) // Map the range 0-1 to 0-360 degrees
-      .to((value) => `rotateZ(${value}deg)`), // Apply the CSS transform
+      style={{
+        ...springs,
+        // transform: springs.rotation.to((r) => `rotate(${r}deg)`),
+        transform: springs.x
+          // .to([0, 1], [0, 360]) // Map the range 0-1 to 0-360 degrees
+          .to((value) => `rotateZ(${value}deg)`), // Apply the CSS transform
       }}
       onClick={!matchedCard ? selectCardClick : undefined}
-      className={`card cursor-pointer p-1 flex flex-col justify-between ${details.suit?.label.toLowerCase()} hover:bg-fuchsia-400 
+      className={`card cursor-pointer p-1 flex flex-col justify-between ${details.suit?.label.toLowerCase()} hover:bg-fuchsia-300 
+        ${toggleSelected && pairedCard ? "selected bg-red-300" : ""}
       ${!toggleSelected && !matchedCard ? "bg-white" : ""}
-        ${toggleSelected ? "selected bg-blue-400" : ""} ${
-        matchedCard ? "cursor-not-allowed bg-green-600" : ""
-      }`}
+        ${toggleSelected ? "selected bg-blue-300" : ""}
+         ${matchedCard ? "cursor-not-allowed bg-green-300" : ""}`}
     >
       <div className="flex flex-col items-start text-center leading-tight">
         <span>

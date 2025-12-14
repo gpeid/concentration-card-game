@@ -65,6 +65,7 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
               matchedCard={
                 deckCopy.findIndex((cardCopy) => cardCopy.id === card.id) === -1
               }
+              pairedCard={pairArray.length === 2}
             />
           ))}
         </div>
