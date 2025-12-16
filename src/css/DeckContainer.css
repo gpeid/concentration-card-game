@@ -16,12 +16,6 @@
   }
 }
 
-.card_container {
-  /* height: 430px;
-	width: 280px; */
-  /* margin: auto; */
-}
-
 .animate {
   animation-duration: 250ms;
   animation-name: shuffleAnimate;

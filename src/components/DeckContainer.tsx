@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Card from "./Card";
 import "./../css/DeckContainer.css";
 import type { CardProperties } from "../types/types";
