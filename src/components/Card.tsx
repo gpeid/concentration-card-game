@@ -47,13 +47,20 @@ const Card: React.FC<CardProps> = ({
     y: 0,
   };
 
-  // This is being used down there in the view, it interpolates rotation and scale into a css transform
-  // const trans = (r: number, s: number) =>
-  //   `perspective(1500px) rotateX(30deg) rotateY(${
-  //     r / 10
-  //   }deg) rotateZ(${r}deg) scale(${s})`;
+  // const springs = useSpring({
+  //   config: {
+  //     tension: Math.floor(randomNumber.y * 100) + 100,
+  //     friction: 20,
+  //     easing: easings.easeInBack,
+  //   },
+  //   from: from,
+  //   to: to,
+  // });
+
+  // const api = useSpringRef();
 
   const springs = useSpring({
+    // ref: api,
     config: {
       tension: Math.floor(randomNumber.y * 100) + 100,
       friction: 20,
@@ -62,6 +69,18 @@ const Card: React.FC<CardProps> = ({
     from: from,
     to: to,
   });
+
+  // 1. Initialize useSpring with a function to get the 'api'
+  // const springs = useSpring(() => ({
+  //   ref: api,
+  //   config: {
+  //     tension: Math.floor(randomNumber.y * 100) + 100,
+  //     friction: 20,
+  //     easing: easings.easeInBack,
+  //   },
+  //   from: from,
+  //   to: to,
+  // }));
 
   // const [props, api] = useSprings(cards.length, (i) => ({
   //   ...to(i),
@@ -76,27 +95,29 @@ const Card: React.FC<CardProps> = ({
           // .to([0, 1], [0, 360]) // Map the range 0-1 to 0-360 degrees
           .to((value) => `rotateZ(${value}deg)`), // Apply the CSS transform
       }}
-      onClick={!matchedCard ? selectCardClick : undefined}
+      onClick={selectCardClick}
       className={`card cursor-pointer p-1 flex flex-col justify-between ${details.suit?.label.toLowerCase()} hover:bg-fuchsia-300 
         ${toggleSelected && pairedCard ? "selected bg-red-300" : ""}
       ${!toggleSelected && !matchedCard ? "bg-white" : ""}
         ${toggleSelected ? "selected bg-blue-300" : ""}
-         ${matchedCard ? "cursor-not-allowed bg-green-300" : ""}`}
+         ${matchedCard ? "cursor-not-allowed bg-green-300 display-card" : ""}`}
     >
-      <div className="flex flex-col items-start text-center leading-tight">
-        <span>
-          {details.rank !== "10" ? details.rank?.charAt(0) : details.rank}{" "}
-          <br />
-          {details.suit?.icon}
-        </span>
-      </div>
-      <div className="text-center text-3xl">{details.suit?.icon}</div>
-      <div className="flex flex-col items-start text-center leading-tight rotate-x-180 rotate-y-180">
-        <span>
-          {details.rank !== "10" ? details.rank?.charAt(0) : details.rank}{" "}
-          <br />
-          {details.suit?.icon}
-        </span>
+      <div className="card-content">
+        <div className="flex flex-col items-start text-center leading-tight">
+          <span>
+            {details.rank !== "10" ? details.rank?.charAt(0) : details.rank}{" "}
+            <br />
+            {details.suit?.icon}
+          </span>
+        </div>
+        <div className="text-center text-3xl">{details.suit?.icon}</div>
+        <div className="flex flex-col items-start text-center leading-tight rotate-x-180 rotate-y-180">
+          <span>
+            {details.rank !== "10" ? details.rank?.charAt(0) : details.rank}{" "}
+            <br />
+            {details.suit?.icon}
+          </span>
+        </div>
       </div>
     </animated.div>
   );
