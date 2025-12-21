@@ -10,34 +10,33 @@ function App() {
   const root = document.querySelector("#root");
 
   const handleGenerateDeckClick = () => {
+    root?.classList.remove("overflow-hidden");
     setDeck(generateDeck());
     setTimeout(() => {
       root?.classList.add("overflow-hidden");
-    }, 1000);
+    }, 1500);
   };
 
   const handleShuffleDeckClick = () => {
     root?.classList.remove("overflow-hidden");
-
-    setDeck(shuffleDeck(deck));
+    const newDeck =
+      deck.length > 0 ? shuffleDeck(deck) : shuffleDeck(generateDeck());
+    setDeck(newDeck);
     setTimeout(() => {
       root?.classList.add("overflow-hidden");
-    }, 1000);
+    }, 1500);
   };
 
   return (
     <>
       <section className="game_header text-center mb-5">
         <h1>Play Match!</h1>
-        {deck?.length > 0 ? (
-          <button type="button" onClick={handleShuffleDeckClick}>
-            Shuffle Deck
-          </button>
-        ) : (
-          <button type="button" onClick={handleGenerateDeckClick}>
-            Generate Deck
-          </button>
-        )}
+        <button type="button" onClick={handleGenerateDeckClick}>
+          Start Easy Game
+        </button>
+        <button type="button" onClick={handleShuffleDeckClick}>
+          Shuffle Deck
+        </button>
       </section>
 
       <section>
