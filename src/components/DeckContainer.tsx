@@ -16,6 +16,7 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
   // array of selected pairs
   const [pairArray, setPairArray] = useState<CardProperties[]>([]);
   const [deckCopy, setDeckCopy] = useState<CardProperties[]>(deck.slice());
+  const [peekCards, setPeekCards] = useState<boolean>(false);
 
   const handleSelectCardClick = (selectedCard: CardProperties): void => {
     const alreadySelected = pairArray.find(
@@ -51,11 +52,18 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
     }
   };
 
+  const handlePeekButtonClick = () => {
+    setPeekCards(!peekCards);
+  };
+
   return (
     <div className="game_container">
+      <button type="button" onClick={handlePeekButtonClick}>
+        {!peekCards ? "Peek" : "Stop Peeking"}
+      </button>
       <ScoreCard matches={arrayOfSelectedMatches} />
       <div className="deck_container relative grid grid-cols-12">
-        <div className="card_container col-span-12 grid grid-cols-13 gap-2">
+        <div className={`card_container col-span-12 grid grid-cols-13 gap-2 ${peekCards ? "peek-cards" : ""}`}>
           {deck.map((card: CardProperties) => (
             <Card
               selectCardClick={() => handleSelectCardClick(card)}
