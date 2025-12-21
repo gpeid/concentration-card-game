@@ -12,6 +12,28 @@
   /* font-style: italic; */
   position: relative;
   overflow: hidden;
+  transition: all 250ms ease;
+
+  .card-content {
+    transition: all 250ms ease;
+    opacity: 0;
+  }
+}
+
+.peek-cards,
+.display-card {
+  .card-content {
+    opacity: 1;
+  }
+}
+
+.selected {
+  @apply scale-150;
+  @apply z-50;
+}
+.selected .card-content {
+  opacity: 1;
+  background: transparent;
 }
 
 .hearts,
