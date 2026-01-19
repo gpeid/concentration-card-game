@@ -22,7 +22,13 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
     const alreadySelected = pairArray.find(
       (card) => card.id === selectedCard.id
     );
-    if (pairArray.length < 2 && !alreadySelected) {
+
+    // check if card selected is a card found in already matched pairs
+    const alreadyMatched = arrayOfSelectedMatches.find((pair) => {
+      return pair.find((card) => card.id === selectedCard.id);
+    });
+
+    if (pairArray.length < 2 && !alreadySelected && !alreadyMatched) {
       const matchingCardsFound: CardProperties | undefined = pairArray.find(
         (item) => item.rank === selectedCard.rank
       );
@@ -63,7 +69,11 @@ const DeckContainer: React.FC<DeckContainerProps> = ({ deck }) => {
       </button>
       <ScoreCard matches={arrayOfSelectedMatches} />
       <div className="deck_container relative grid grid-cols-12">
-        <div className={`card_container col-span-12 grid grid-cols-13 gap-2 ${peekCards ? "peek-cards" : ""}`}>
+        <div
+          className={`card_container col-span-12 grid grid-cols-13 gap-2 ${
+            peekCards ? "peek-cards" : ""
+          }`}
+        >
           {deck.map((card: CardProperties) => (
             <Card
               selectCardClick={() => handleSelectCardClick(card)}
