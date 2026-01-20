@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CardProperties } from "../types/types";
+import { animated, useSpring } from "@react-spring/web";
 
 interface ScoreCardProps {
   matches: CardProperties[][];
@@ -7,6 +8,21 @@ interface ScoreCardProps {
 
 const ScoreCard: React.FC<ScoreCardProps> = ({ matches }) => {
   const [showMatchHistory, setShowMatchHistory] = useState(false);
+
+  const from = {
+    scale: 1.25,
+  };
+
+  const to = {
+    scale: 1,
+  };
+
+  const [spring, api] = useSpring(() => ({
+    // 'to' value depends on the state
+    from: from,
+    to: to,
+    config: { tension: 300, friction: 10 }, // Customize the spring physics
+  }));
 
   const handleShowMatchHistoryClick = () => {
     setShowMatchHistory(!showMatchHistory);
@@ -21,6 +37,13 @@ const ScoreCard: React.FC<ScoreCardProps> = ({ matches }) => {
       return "bg-black text-white";
     }
   };
+
+  useEffect(() => {
+    api.start({
+      from: from,
+      to: to,
+    });
+  }, [matches.length]);
 
   return (
     <div className="score_card p-1 mb-5 border border-black rounded ">
@@ -40,7 +63,13 @@ const ScoreCard: React.FC<ScoreCardProps> = ({ matches }) => {
             <>Show match history &#9660;</>
           )}
         </button>
-        <p>Matched Pairs: {matches.length}</p>
+        <animated.p
+          style={{
+            ...spring,
+          }}
+        >
+          Matched Pairs: {matches.length}
+        </animated.p>
       </div>
 
       {showMatchHistory && (
